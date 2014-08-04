@@ -17,6 +17,12 @@ From the directory you want to serve static files:
 
 `--browser` `-b` Specify browser
 
+`--watch` `-w` Additional paths to watch
+
+`--silent` `-s` Don't automatically open a browser
+
+`--responses` `-r` Specify a json file containing a response map
+
 ### Examples
 Start in default port
 
@@ -34,9 +40,46 @@ Open in other browser than your system default
 
 `sencisho --browser opera` or `sencisho -b opera`
 
+Add additional paths to the file watcher
+
+`sencisho --watch js/*.js` or `sencisho -w js/*.js`
+
+Don't automatically open a browser
+
+`sencisho --silent` or `sencisho -s`
+
+Specify a json file containing a response map
+
+`sencisho --responses api.json` or `sencisho -r api.json`
+
+Example:
+
+```
+{
+  "/api/test": {
+
+    "headers": {
+      "Content-type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "X-Requested-With"
+    },
+
+    "statusCode": 200,
+
+    "body": {
+      "name": "Something",
+      "data": [1, 2, 3, 4, 5]
+    }
+  }
+}
+```
+
+The only required property is the `body` but you can specify `headers` and a `statusCode`
+
+
 All at once (may be passed in any order)
 
-`sencisho -p 8888 -l -b opera`
+`sencisho -p 8888 -l -b opera -w js/*.js -s -r api.json`
 
 ### Misc
 + What's up with that name?
